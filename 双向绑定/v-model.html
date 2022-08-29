@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" id="inp">
+    <p id="p"></p>
+</body>
+</html>
+<script>
+    // 双向数据绑定
+    // var obj={}
+    // 三个参数  当前对象  新增属性  方法set get
+    // Object.defineProperty(obj,'num',{
+    //     get:()=>{
+    //         return val
+    //     },
+    //     set:(value)=>{
+    //         val=value
+    //         document.getElementById('p').innerHTML=val
+    //     }
+    // })
+    // document.addEventListener('keyup',function(e){
+    //     obj.num=e.target.value
+    // })
+    
+    // 双向数据绑定
+    // var obj={}
+    // Object.defineProperty(obj,'sum',{
+    //     get:()=>{
+    //         return val
+    //     },
+    //     set:(value)=>{
+    //         val=value
+    //         document.getElementById('p').innerHTML=val
+    //     }
+    // })
+    // document.addEventListener('keyup',function(e){
+    //     obj.sum=e.target.value
+    // })
+    // vue2双向数据绑定
+    var obj ={}
+    // 有三个参数 给谁新增  新增的值  方法setget
+    Object.defineProperty(obj,'prop',{
+        get:()=>{
+            return val
+        },
+        set:(value)=>{
+            val=value
+            // 获取元素
+            document.getElementById('p').innerHTML=val
+        }
+    })
+    // 监听赋值
+    document.addEventListener('keyup',function(e){
+        obj.prop=e.target.value
+    })
+</script>

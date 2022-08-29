@@ -1,0 +1,91 @@
+vuex是专门为vue制作的，由于vue2的渲染原理，和vue更适配
+namespace:ture,防止命名污染
+pm产品经理  rd研发人员 qa测试 
+pro-->production:生产环境，也叫全量，真机    stage:灰度，备机   test:测试环境，可以自己用    dev:可以使用开发环境
+
+1.在views里创建一个 .editorconfig文件 用于代码规范校验
+里面写：root = true
+            [*] #表示所有文件适用
+            charset =  = utf-8 #设置文件字符集为utf-8
+            indent_style =  = tab #缩进风格（tab |space )
+            indent_size =  = 2 # 缩进大小
+            end_of_line =  = 1f # 控制换行类型（1f | cr | cr1f )
+            trim_trailing_whitespace =  = true #去除行首的任意空白字符
+            insert_final_newline =  = true # 始终在文件末尾插入一个新行
+            [*.md] # 表示仅md文件适用以下规则
+            max_line_length = off 
+            trim_trailing_whitespace = false
+2.整体新创建一个 .prettierignore文件
+里面写：/dist/*
+            .local
+            .output.js
+           /node_modules/**
+           **/*.svg
+           **/*.sh
+          /public/*
+在创建一个 .prettierrc 文件
+{
+	"useTabs": true,
+	"tabWidth": 2,
+	"printWidth": 80,
+	"singleQuote": false,
+	"trailingComma": "none",
+	"semi": false
+}
+一、前端为什么需要单元测试？
+1. 必要性：javascript 缺少类型检查，编译期间无法定位到错误，单元测试可以帮助你测试多种异常情况。
+2. 正确性：测试可以验证代码的正确性，在上线前做到心里有底。
+3.自动化：通过console虽然可以打印内部信息，但是这是一次性的事情，下次测试还需要从头来过，效率不能得到保证。通过编写测试用例，可以做到一次编写，多次运行。
+4.保证重构：互联网行业产品diedai-速度很快，迭代后必然存在重构的过程，为保证重构后代码的质量，必须有测试用例
+
+二、vue-cli2和cli3的区别
+1. vue-cli3是基于webpack4的，vue-cli2是基于webpack3
+2.vue-cli3的设计原则是‘’0配置‘’，移除了配置文件genmulu-下bulid和config等目录
+3.vue-cli3提供了vue ui 命令，进行可视化配置，操作更方便
+4.替换了static文件夹，并且index.html移动到public文件夹中
+三、配置打包文件
+const path = require('path')
+const resolve = (dir) => path.jion(__dirname, '.', dir)
+module.exports = defineConfig({
+transpileDependencies:true,
+productionSourceMap:false,//  是否在构建生产包时生成sourceMap 文件，false提高构建速度
+filenameHashing：false,//  生成的静态资源在文件名中包含了hash一边更好的控制缓存
+lintOnSave:false, //  代码保存时进行eslint检测
+publicPath:'./', // 生产环境和开发环境下的url
+outputDir:'static', //  输出文件目录
+assetsDir:'assets', //  生成的静态资源
+deServer:{
+      port:8089,
+      https:false,
+      host:'0.0.0.0',//  设置为0.0.0.0则所有的地址都能访问
+
+      open:true,
+     // 配置代理
+      proxy:{
+        "/api":{
+               changeOrigin:true,// 开启跨域
+               target:'http://www.****.com',
+               pathRewqrite:{
+                            '/api':''
+}
+}
+}  
+},
+chainWebpack: (config) => {
+	config.module
+	.rule('vue')
+	.use('vue-loader')
+	.tap((options) => {
+		return
+})
+.end()
+},
+configureWebpack:{
+	resolve:{
+		alias:{
+			'@':resolve('src'),
+			'vue$' : 'vue/dist/vue.esm.js'
+}
+}
+}
+})

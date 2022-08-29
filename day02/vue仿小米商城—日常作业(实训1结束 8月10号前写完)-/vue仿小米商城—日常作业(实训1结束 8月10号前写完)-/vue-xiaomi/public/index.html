@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <link rel="icon" href="<%= BASE_URL %>favicon.ico">
+  <title><%= htmlWebpackPlugin.options.title %></title>
+  <!-- 引入vue的cdn，因为elment依赖vue -->
+  <% if (process.env.NODE_ENV==='production' ) { %>
+        
+  <script src=https://cdn.staticfile.org/vue/2.5.22/vue.min.js></script>
+  <!-- 引入样式 -->
+  <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+  <!-- 引入组件库 -->
+  <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+  <script crossorigin="anonymous"
+    integrity="sha512-eL1tSXni6mqOrxcK6fN2Dy4/6T/SXrA9GUCNvbxsoDWsTyyND1GxzwJRS+ENat+7lBk8Jz1KuD73C80273pxpg=="
+    src="https://lib.baomitu.com/echarts/4.9.0-rc.1/echarts-en.common.js"></script>
+    <% } %> 
+</head>
+
+<body>
+  <noscript>
+    <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled.
+      Please enable it to continue.</strong>
+  </noscript>
+  <div id="app"></div>
+  <!-- built files will be auto injected -->
+</body>
+
+</html>
